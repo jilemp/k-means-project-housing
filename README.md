@@ -36,7 +36,7 @@ Only the following features are used for clustering:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/jilemp/your-repo-name.git
+   git clone https://github.com/jilemp/k-means-project-housing.git
    ```
 2. Navigate to the project folder:
    ```bash
