@@ -1,88 +1,68 @@
-# Plantilla de Proyecto de Ciencia de Datos
 
-Esta plantilla está diseñada para impulsar proyectos de ciencia de datos proporcionando una configuración básica para conexiones de base de datos, procesamiento de datos, y desarrollo de modelos de aprendizaje automático. Incluye una organización estructurada de carpetas para tus conjuntos de datos y un conjunto de paquetes de Python predefinidos necesarios para la mayoría de las tareas de ciencia de datos.
+# 🗺️ Clustering K-Means en Datos de Vivienda de California
 
-## Estructura
+Este proyecto demuestra cómo aplicar **aprendizaje automático no supervisado** utilizando el algoritmo de **K-Means** en datos reales de viviendas. El objetivo es explorar patrones regionales basados en características geográficas y económicas.
 
-El proyecto está organizado de la siguiente manera:
+## 🔍 Descripción General
 
-- `app.py` - El script principal de Python que ejecutas para tu proyecto.
-- `explore.py` - Un notebook para que puedas hacer tus exploraciones, idealmente el codigo de este notebook se migra hacia app.py para subir a produccion.
-- `utils.py` - Este archivo contiene código de utilidad para operaciones como conexiones de base de datos.
-- `requirements.txt` - Este archivo contiene la lista de paquetes de Python necesarios.
-- `models/` - Este directorio debería contener tus clases de modelos SQLAlchemy.
-- `data/` - Este directorio contiene los siguientes subdirectorios:
-  - `interim/` - Para datos intermedios que han sido transformados.
-  - `processed/` - Para los datos finales a utilizar para el modelado.
-  - `raw/` - Para datos brutos sin ningún procesamiento.
+Usando un conjunto de datos simplificado de viviendas en California, realizamos:
 
-## Configuración
+- Carga y preprocesamiento de datos con **pandas**
+- Aplicación del algoritmo **K-Means** para agrupar regiones similares
+- Visualización de los clústeres en un mapa usando **Plotly**
+- (Opcional) Exploración del uso de **RandomForestClassifier** para tareas de clasificación
 
-**Prerrequisitos**
+## 📁 Conjunto de Datos
 
-Asegúrate de tener Python 3.11+ instalado en tu máquina. También necesitarás pip para instalar los paquetes de Python.
-
-**Instalación**
-
-Clona el repositorio del proyecto en tu máquina local.
-
-Navega hasta el directorio del proyecto e instala los paquetes de Python requeridos:
-
-```bash
-pip install -r requirements.txt
-```
-
-**Crear una base de datos (si es necesario)**
-
-Crea una nueva base de datos dentro del motor Postgres personalizando y ejecutando el siguiente comando: `$ createdb -h localhost -U <username> <db_name>`
-Conéctate al motor Postgres para usar tu base de datos, manipular tablas y datos: `$ psql -h localhost -U <username> <db_name>`
-NOTA: Recuerda revisar la información del archivo ./.env para obtener el nombre de usuario y db_name.
-
-¡Una vez que estés dentro de PSQL podrás crear tablas, hacer consultas, insertar, actualizar o eliminar datos y mucho más!
-
-**Variables de entorno**
-
-Crea un archivo .env en el directorio raíz del proyecto para almacenar tus variables de entorno, como tu cadena de conexión a la base de datos:
-
-```makefile
-DATABASE_URL="your_database_connection_url_here"
-```
-
-## Ejecutando la Aplicación
-
-Para ejecutar la aplicación, ejecuta el script app.py desde la raíz del directorio del proyecto:
-
-```bash
-python app.py
-```
-
-## Añadiendo Modelos
-
-Para añadir clases de modelos SQLAlchemy, crea nuevos archivos de script de Python dentro del directorio models/. Estas clases deben ser definidas de acuerdo a tu esquema de base de datos.
-
-Definición del modelo de ejemplo (`models/example_model.py`):
-
-```py
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-
-Base = declarative_base()
-
-class ExampleModel(Base):
-    __tablename__ = 'example_table'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
+El conjunto de datos está disponible públicamente y se carga directamente desde:
 
 ```
+https://raw.githubusercontent.com/4GeeksAcademy/k-means-project-tutorial/main/housing.csv
+```
 
-## Trabajando con Datos
+Solo se utilizan las siguientes características para el clustering:
+- `Latitude` (Latitud)
+- `Longitude` (Longitud)
+- `MedInc` (Ingreso Medio)
 
-Puedes colocar tus conjuntos de datos brutos en el directorio data/raw, conjuntos de datos intermedios en data/interim, y los conjuntos de datos procesados listos para el análisis en data/processed.
+## ⚙️ Tecnologías Utilizadas
 
-Para procesar datos, puedes modificar el script app.py para incluir tus pasos de procesamiento de datos, utilizando pandas para la manipulación y análisis de datos.
+- `pandas`, `numpy` – Manipulación de datos
+- `scikit-learn` – Modelos de clustering y aprendizaje automático
+- `plotly.express` – Visualización interactiva de datos
+- `Jupyter Notebook` – Análisis exploratorio y flujo de trabajo
 
-## Contribuyentes
+## 🚀 Cómo Ejecutar
 
-Esta plantilla fue construida como parte del [Data Science and Machine Learning Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) de 4Geeks Academy por [Alejandro Sanchez](https://twitter.com/alesanchezr) y muchos otros contribuyentes. Descubre más sobre [los programas BootCamp de 4Geeks Academy](https://4geeksacademy.com/us/programs) aquí.
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/jilemp/k-means-project-housing.git
+   ```
+2. Navega a la carpeta del proyecto:
+   ```bash
+   cd tu-repo
+   ```
+3. Abre el Jupyter Notebook:
+   ```bash
+   jupyter notebook "explore.ipynb"
+   ```
+4. Ejecuta cada celda en orden.
 
-Otras plantillas y recursos como este se pueden encontrar en la página de GitHub de la escuela.
+## 📊 Resultados
+
+- El algoritmo K-Means segmenta California en **6 clústeres distintos** basados en ingresos y geografía.
+- Los gráficos interactivos muestran cómo se distribuyen los clústeres espacialmente.
+
+## 🧠 Trabajo Futuro
+
+- Evaluar el rendimiento del clustering usando métricas como el Silhouette Score
+- Añadir clasificación usando `RandomForestClassifier`
+- Mejorar la selección de características (por ejemplo, incluir población o antigüedad de la vivienda)
+
+## 📜 Licencia
+
+Este proyecto es de código abierto y está disponible bajo la [Licencia MIT](LICENSE).
+
+---
+
+> Hecho usando Jupyter & scikit-learn
